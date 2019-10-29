@@ -1,0 +1,1 @@
+É uma base da parte de perfil e recados do site, precisa ainda de algumas alterações e as funcionabilidades (deixar a foto para poder ser alterado, poder alterar e gravar o nome, email etc) , tem "tudo" no wireframe. 
