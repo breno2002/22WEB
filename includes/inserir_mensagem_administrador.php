@@ -17,7 +17,7 @@ if (isset($_POST['recado'])) {
 
         $row_p = $query_tipo_p->fetch_array();
 
-        $sql_recado_p = 'insert into tb_mensagem_administrador values(null, "'.$recado.'", '.$row_p['cd_professor'].', null, '.$_SESSION['cd_usuario'].', '.date('d/m/y').', '.date('H:i:s').'")';
+        $sql_recado_p = 'insert into tb_mensagem_administrador values(null, "'.$recado.'", '.$row_p['cd_professor'].', null, null, '.$_SESSION['cd_usuario'].', '.date('d/m/y').', '.date('H:i:s').'")';
 
       if (!$query_recado_p = $mysqli->query($sql_recado_p)){
                         
@@ -54,7 +54,7 @@ if (isset($_POST['recado'])) {
        $row_r = $query_tipo_r->fetch_array();
 
        
-        $sql_recado_r = 'insert into tb_mensagem_administrador values(null, "'.$recado.'", null, '.$row_r['cd_responsavel'].', "'.$_SESSION['cd_usuario'].'", "'.date('d/m/y').'", "'.date('H:i:s').'")';
+        $sql_recado_r = 'insert into tb_mensagem_administrador values(null, "'.$recado.'", null, '.$row_r['cd_responsavel'].', null, "'.$_SESSION['cd_usuario'].'", "'.date('d/m/y').'", "'.date('H:i:s').'")';
 
       if (!$query_recado_r = $mysqli->query($sql_recado_r)){
                         

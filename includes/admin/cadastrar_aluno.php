@@ -21,8 +21,6 @@
 
    $sql_aluno = 'insert into tb_aluno values(null, "'.$nome_aluno.'", "'.$rg_aluno.'", "'.$sozinho_aluno.'", '.$idade_aluno.', "'.$pasta.$nome.'", '.$turma_aluno.', '.$sexo_aluno.');';
 
-   echo $sql_aluno;
-
   if(!$mysqli->query($sql_aluno)){
      echo "Error%s/n", $mysqli -> error;
   }

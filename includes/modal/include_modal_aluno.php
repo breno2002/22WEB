@@ -1,7 +1,6 @@
                   <div class="card-content">
                    
                      <p>
-                      <form method='post' enctype="multipart/form-data" name='aluno'>
                         
                         <div class="row">
                         <div class="input-field col s8 m7 l6">
@@ -153,8 +152,6 @@
                         </div>
 
                               
-
-                       </form>
                       </p>
                   </div>
 

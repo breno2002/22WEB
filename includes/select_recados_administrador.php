@@ -31,7 +31,7 @@ $sql_recado = 'select * from tb_recado_canal_administrador
 
                                      echo'<tr>
                                             <td><input type="checkbox"> <a href="#"><i class="icon-star-empty"></i></a></td>
-                                            <td><strong>Você';
+                                            <td><strong>Você ';
 
                                             echo utf8_encode('para '.$row_adm_mandar['nm_responsavel'].'</strong></td>
                                             <td><span class="label pull-right" style= "color :#b71c1c;">'.$row_tipo['nm_tipo_recado'].'</span></td>
@@ -45,7 +45,7 @@ $sql_recado = 'select * from tb_recado_canal_administrador
 
                                    echo'<tr>
                                             <td><input type="checkbox"> <a href="#"><i class="icon-star-empty"></i></a></td>
-                                            <td><strong>Você';
+                                            <td><strong>Você ';
 
                                             echo utf8_encode('para '.$row_adm_mandar['nm_responsavel'].'</strong></td>
                                             <td><span class="label pull-right" style= "color :#ffb74d;">'.$row_tipo['nm_tipo_recado'].'</span></td>
@@ -58,7 +58,7 @@ $sql_recado = 'select * from tb_recado_canal_administrador
                                if ($row_tipo['cd_tipo_recado']=='3') {
                                     echo'<tr>
                                             <td><input type="checkbox"> <a href="#"><i class="icon-star-empty"></i></a></td>
-                                            <td><strong>Você';
+                                            <td><strong>Você ';
 
                                             echo utf8_encode('para '.$row_adm_mandar['nm_responsavel'].'</strong></td>
                                             <td><span class="label pull-right" style= "color :#29b6f6;">'.$row_tipo['nm_tipo_recado'].'</span></td>

@@ -14,8 +14,17 @@
         $query_notas = $mysqli->query($sql_notas);
 
         while ($row_nota = $query_notas->fetch_array()) {
-         echo '<div id="col s2"><b>Nome da atividade:</b>'.$row_nota['nm_atividade']. ' Menção:' .$row_nota['vl_nota']. ' Bimestre: '.$row_nota['id_bimestre'].'º Bimestre';
-         echo '   <a href="nota.php?id='.$row_nota['cd_nota'].'" id="delete">deletar</a>      <a href="alterar.php?id='.$row_nota['cd_nota'].'" id="mudar">alterar</a></div>';
+         echo ' <tr>
+          <td data-title="ID">1</td>
+          <td data-title="Name">'.$row_nota['nm_aluno'].'</td>
+          <td data-title="Link">
+            <a>'.$row_nota['vl_nota'].'</a>
+          </td>
+          <td data-title="Link">
+            <a>'.$row_nota['id_bimestre'].'</a>
+          </td>
+
+        </tr>';
          }
         
         }
