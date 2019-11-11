@@ -98,11 +98,6 @@ session_start();
           <i class="fas fa-fw fa-comments"></i>
           <span>Chat</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="calendario.php">
-          <i class="fas fa-fw fa-calendar-day"></i>
-          <span>Calendário</span></a>
-      </li>
       <li class="nav-item active">
         <a class="nav-link" href="formulario.php">
           <i class="fas fa-fw fa-id-card"></i>
@@ -113,11 +108,24 @@ session_start();
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Registros</span></a>
       </li>
+      <form method="post">
+      
       <li class="nav-item">
-        <a class="nav-link" href="">
+
+          <a class="nav-link" href="">
           <i class="fas fa-fw fa-power-off"></i>
-          <span>Sair</span></a>
+          <span><button type='submit' name='desligar' style="background: none; text-decoration: none; border: none; color: rgba(255, 255, 255, 0.5);">Sair</button></span></a>
       </li>
+      </form>
+
+      <?php 
+
+      if (isset($_POST['desligar'])) {
+        session_destroy();    
+        header('location:../login.php'); 
+      }
+
+      ?>
     </ul>
 
 
@@ -141,41 +149,44 @@ session_start();
 
 
         if (empty($_GET['id'])) {
-          echo '<h1>Responsável</h1>';
+          echo '<form method="post" enctype="multipart/form-data"><h1>Responsável</h1>';
             include('../includes/modal/include_modal_responsavel.php');
-            include('../includes/admin/cadastrar_responsavel.php');
             echo '<h1>Aluno</h1>';
             include('../includes/modal/include_modal_aluno.php');
-            include('../includes/admin/cadastrar_aluno.php');
+            echo '</form>';
+            include('../includes/admin/cadastrar_responsavel.php');
         }
 
         if (isset($_GET['id'])){
 
           if ($_GET['id'] == 2) {
 
+            echo '<form method="post" enctype="multipart/form-data"><h1>Responsável</h1>';
             echo '<h1>Responsável</h1>';
             include('../includes/modal/include_modal_responsavel.php');
-            include('../includes/admin/cadastrar_responsavel.php');
             echo '<h1>Aluno</h1>';
             include('../includes/modal/include_modal_aluno.php');
-            include('../includes/admin/cadastrar_aluno.php');
+            echo '</form>';
+            include('../includes/admin/cadastrar_responsavel.php');
 
           }
 
           if ($_GET['id'] == 3) {
 
+            echo '<form method="post" enctype="multipart/form-data"><h1>Responsável</h1>';
             echo '<h1>Professor</h1>';
             include('../includes/modal/include_modal_professor.php');
+            echo '</form>';
             include('../includes/admin/cadastrar_professor.php');
-
           }
 
           if ($_GET['id'] == 4) {
 
+            echo '<form method="post" enctype="multipart/form-data"><h1>Responsável</h1>';
             echo '<h1>Administrador</h1>';
             include('../includes/modal/include_modal_administrador.php');
+            echo '</form>';
             include('../includes/admin/cadastrar_administrador.php');
-
           }
 
         }
@@ -243,8 +254,6 @@ session_start();
   <script src="js/demo/chart-area-demo.js"></script>
 
   <?php 
-
-  include '../includes/include_moda_responsavel.php';
 
   ?>
 

@@ -121,11 +121,6 @@ else{
           <span>Chat</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendario.php">
-          <i class="fas fa-fw fa-calendar-day"></i>
-          <span>Calendário</span></a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="formulario.php">
           <i class="fas fa-fw fa-id-card"></i>
           <span>Formulário</span></a>
@@ -135,11 +130,23 @@ else{
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Registros</span></a>
       </li>
+      <form method="post">
+      
       <li class="nav-item">
-        <a class="nav-link" href="">
+
+          <a class="nav-link" href="">
           <i class="fas fa-fw fa-power-off"></i>
-          <span>Sair</span></a>
+          <span><button type='submit' name='desligar' style="background: none; text-decoration: none; border: none; color: rgba(255, 255, 255, 0.5);">Sair</button></span></a>
       </li>
+      </form>
+
+      <?php 
+
+      if (isset($_POST['desligar'])) {
+        session_destroy();    
+header('location:../login.php');       }
+
+      ?>
     </ul>
 
 
@@ -158,36 +165,24 @@ else{
 
         <div class="row">
                     <div class="col">
-                <form method="post">
+
+                <form method="POST">
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1"><b style="color: grey;">Tipo de recado</b></label>
 
 
                   <br>
 
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-                      <label class="custom-control-label" for="customRadioInline1" name='tipo' value='1'>Padrão</label>
-                    </div>
-
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-                      <label class="custom-control-label" for="customRadioInline2" name='tipo' value='2'>Urgente</label>
-                    </div>
-
-                    <div class="custom-control custom-radio custom-control-inline">
-                      <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
-                      <label class="custom-control-label" for="customRadioInline3" name='tipo' value='3'>Evento</label>
-                    </div>
+                    <?php include '../includes/select_tipoderecado.php'; ?>
 
                     <br><br>
 
 
-                      <select class="form-control" style="background: white; border: 1px grey solid; border-radius:3%;" name="periodo">
+                      <select class="form-control" style="background: white; border: 1px grey solid; border-radius:3%;" name="select_destinatario">
                         <option>Selecione o destino do recado...</option>
-                        <option value="1">Turmas da manhã</option>
-                        <option value="2">Turmas da tarde</option>
-                        <option value="3">Todas as turmas</option>
+                        <option value="manha">Turmas da manhã</option>
+                        <option value="tarde">Turmas da tarde</option>
+                        <option value="todos">Todas as turmas</option>
                       </select><br>
 
 
@@ -195,7 +190,7 @@ else{
                 <textarea class="form-control" id="exampleFormControlTextarea1"  rows="4" style="background: white; border: 1px grey solid; border-radius:3%;" name="recado"></textarea>
               </div>
 
-              <button type="button" class="btn btn-primary btn-lg btn-block">Enviar</button><br>
+              <button type="submit" class="btn btn-primary btn-lg btn-block" name="mandar">Enviar</button><br>
                 </form>
 
                 <div class="row" style="border: solid 1px #cacaca; font-style: italic; height: 200px; padding: 10px; background-color: #eee;">
@@ -284,10 +279,10 @@ else{
 
  
 
-  if(isset($_POST['select_destinatario'])){
+  if(isset($_POST['periodo'])){
     $recado = $_POST['recado'];
-    $tipoderecado = $_POST['select_tipo'];
-    $cpf_dest = $_POST['select_destinatario'];
+    $tipoderecado = $_POST['tipo'];
+    $cpf_dest = $_POST['periodo'];
     $remetente = $_SESSION['cd_usuario'];  
     $c=0;
 
@@ -299,30 +294,50 @@ else{
 
       while ($row_todos = $query_todos->fetch_array()){
   
-        $a[$c++] = $mysqli->query('insert into tb_recado_canal_administrador values(null, "'.$recado.'", '.$remetente.', '.$row_todos['cd_responsavel'].', '.$tipoderecado.', "'.date('d/m/y').' '.date('H:i:s').'")');
+        $a = $mysqli->query('insert into tb_recado_canal_administrador values(null, "'.$recado.'", '.$remetente.', '.$row_todos['cd_responsavel'].', '.$tipoderecado.', "'.date('d/m/y').' '.date('H:i:s').'")');
 
-          echo '<meta http-equiv="refresh" content="0.1">';
+         echo $a[$c];
+
       }
 
       
     }
-        
-        $sql_dest_resp = 'select * from tb_responsavel where ds_cpf_responsavel = "'.$cpf_dest.'"';
-        $query_dest_resp = $mysqli->query($sql_dest_resp);
 
-        $row_resp = $query_dest_resp->fetch_array();
+    if ($cpf_dest == "m") {
 
-        $sql_recado_resp = 'insert into tb_recado_canal_administrador values(null, "'.$recado.'", '.$remetente.', '.$row_resp['cd_responsavel'].', '.$tipoderecado.', "'.date('d/m/y').' '.date('H:i:s').'")';
+      $sql_manha = 'select * from tb_aluno where id_turma < 9';
+      $query_manha = $mysqli->query($sql_manha);
 
-        if (!$query_recado_resp = $mysqli->query($sql_recado_resp)){
-                        
-         echo "Error%s/n", $mysqli -> error;
+      while ($row_manha = $query_manha->fetch_array()){
+  
+        $a_manha = $mysqli->query('insert into tb_recado_canal_administrador values(null, "'.$recado.'", '.$remetente.', '.$row_manha['cd_responsavel'].', '.$tipoderecado.', "'.date('d/m/y').' '.date('H:i:s').'")');
+         echo $a_manha[$c];
 
       }
 
-      else{
-        echo '<meta http-equiv="refresh" content="0.1">';
+      
+    }
+
+    if ($cpf_dest == "t") {
+
+      $sql_tarde = 'select * from tb_aluno where id_turma > 9';
+      $query_tarde = $mysqli->query($sql_tarde);
+
+      while ($row_tarde = $query_tarde->fetch_array()){
+  
+        $sql_p_t = 'select * from tb_aluno_responsavel inner join tb_responsavel on(tb_responsavel.cd_responsavel = tb_aluno_responsavel.id_usuario_responsavel) where id_aluno = '.$row_tarde['cd_aluno'].' ';
+
+        $query_p_t = $mysqli->query($sql_p_t);
+        $r_p_t = $query_p_t->fetch_array();
+
+        $a_tarde = $mysqli->query('insert into tb_recado_canal_administrador values(null, "'.$recado.'", '.$remetente.', '.$a_tarde['cd_responsavel'].', '.$tipoderecado.', "'.date('d/m/y').' '.date('H:i:s').'")');
+
+        echo $a_tarde[$c];
+
       }
+
+      
+    }
   }
 
     }

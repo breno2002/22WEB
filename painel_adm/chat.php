@@ -116,11 +116,6 @@ else{
           <span>Chat</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendario.php">
-          <i class="fas fa-fw fa-calendar-day"></i>
-          <span>Calendário</span></a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="formulario.php">
           <i class="fas fa-fw fa-id-card"></i>
           <span>Formulário</span></a>
@@ -130,11 +125,24 @@ else{
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Registros</span></a>
       </li>
+      <form method="post">
+      
       <li class="nav-item">
-        <a class="nav-link" href="">
+
+          <a class="nav-link" href="">
           <i class="fas fa-fw fa-power-off"></i>
-          <span>Sair</span></a>
+          <span><button type='submit' name='desligar' style="background: none; text-decoration: none; border: none; color: rgba(255, 255, 255, 0.5);">Sair</button></span></a>
       </li>
+      </form>
+
+      <?php 
+
+      if (isset($_POST['desligar'])) {
+        session_destroy();    
+        header('location:../login.php'); 
+      }
+
+      ?>
     </ul>
 
 

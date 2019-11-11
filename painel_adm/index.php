@@ -122,11 +122,6 @@ else{
           <span>Chat</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="calendario.php">
-          <i class="fas fa-fw fa-calendar-day"></i>
-          <span>Calendário</span></a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="formulario.php">
           <i class="fas fa-fw fa-id-card"></i>
           <span>Formulário</span></a>
@@ -151,8 +146,7 @@ else{
 
       if (isset($_POST['desligar'])) {
         session_destroy();    
-        echo '<meta http-equiv="refresh" content="0.1">'; 
-      }
+header('location:../login.php');       }
 
       ?>
 
